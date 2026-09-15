@@ -5,8 +5,7 @@ using namespace std;
 // Merges two subarrays of arr[].
 // First subarray is arr[left..mid]
 // Second subarray is arr[mid+1..right]
-void merge(vector<int>& arr, int left,
-                     int mid, int right){
+void merge(vector<int>& arr, int left,  int mid, int right){
 
     int n1 = mid - left + 1;
     int n2 = right - mid;

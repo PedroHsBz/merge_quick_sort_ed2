@@ -4,16 +4,19 @@ using namespace std;
 
 int partition(vector<int>& arr, int low, int high) {
 
-    // choose the pivot
+    // choose the
+    // Escolhe um pivo ou um ponto de referencia, que nesse caso e o ultimo elemento
     int pivot = arr[high];
 
     // undex of smaller element and indicates
     // the right position of pivot found so far
+    //Pega o index do low que seria o inico do metodo, alem de pegar ele add -1
     int i = low - 1;
 
     // Traverse arr[low..high] and move all smaller
     // elements on left side. Elements from low to
     // i are smaller after every iteration
+    //um for para fazer swap i e j quando o j e for menor que
     for (int j = low; j <= high - 1; j++) {
         if (arr[j] < pivot) {
             i++;
@@ -35,7 +38,8 @@ void quickSort(vector<int>& arr, int low, int high) {
         // pi is the partition return index of pivot
         int pi = partition(arr, low, high);
 
-        // recursion calls for smaller elements
+        // recursion calls for sma
+        // ]ller elements
         // and greater or equals elements
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
