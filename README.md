@@ -8,9 +8,6 @@ algoritmos avançados de ordenação.
 
 ```
 .
-├── include/
-│   ├── merge_sort.hpp   # declarações do Merge Sort
-│   └── quick_sort.hpp   # declarações do Quick Sort
 ├── src/
 │   ├── merge_sort.cpp   # implementação do Merge Sort
 │   ├── quick_sort.cpp   # implementação do Quick Sort
@@ -33,17 +30,6 @@ No Windows (MinGW), o processo é o mesmo, apenas ajustando o nome do executáve
 g++ -std=c++17 -O2 -Wall -Wextra -Iinclude src/*.cpp -o ordenacao.exe
 ordenacao.exe
 ```
-
-## O que os testes em `main.cpp` cobrem
-
-| Caso | O que valida |
-|---|---|
-| 1 | Ordenação de um vetor pequeno, com saída antes/depois |
-| 2 | Vetor já ordenado (melhor caso teórico) |
-| 3 | Vetor em ordem decrescente |
-| 4 | Vetor com elementos repetidos |
-| 5 | Casos extremos: vetor vazio e vetor de 1 elemento |
-| 6 | Comparação de tempo de execução com um vetor aleatório grande (20.000 elementos) |
 
 ## Resumo dos algoritmos
 
