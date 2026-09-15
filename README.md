@@ -1,7 +1,5 @@
 # Merge Sort & Quick Sort — Estrutura de Dados II
 
-Grup: Karine, Pedro e Lucas Daniel 
-
 Implementação própria dos algoritmos **Merge Sort** e **Quick Sort** em C++,
 desenvolvida para o seminário da disciplina de Estrutura de Dados II sobre
 algoritmos avançados de ordenação.
@@ -49,5 +47,5 @@ no pior caso O(n²) mesmo em entradas já ordenadas.
 
 ## Autores
 
-Grupo — Estrutura de Dados II — IFTM Campus Patrocínio
+Grupo: Karine, Pedro e Lucas — Estrutura de Dados II — IFTM Campus Patrocínio
 Apresentação: 16/09/2026
