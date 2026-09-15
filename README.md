@@ -1,5 +1,7 @@
 # Merge Sort & Quick Sort — Estrutura de Dados II
 
+Grup: Karine, Pedro e Lucas Daniel 
+
 Implementação própria dos algoritmos **Merge Sort** e **Quick Sort** em C++,
 desenvolvida para o seminário da disciplina de Estrutura de Dados II sobre
 algoritmos avançados de ordenação.
@@ -9,9 +11,8 @@ algoritmos avançados de ordenação.
 ```
 .
 ├── src/
-│   ├── merge_sort.cpp   # implementação do Merge Sort
-│   ├── quick_sort.cpp   # implementação do Quick Sort
-│   └── main.cpp         # casos de teste e comparação de desempenho
+│   ├── merge_sort.cpp   # implementação do Merge Sort com main para testes
+│   └── quick_sort.cpp   # implementação do Quick Sort com main para testes
 └── README.md
 ```
 

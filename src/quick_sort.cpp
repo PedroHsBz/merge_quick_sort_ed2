@@ -2,50 +2,53 @@
 #include <vector>
 using namespace std;
 
+// Metodo partition que recebe o nosso vetor arr, o index low (que é o menor index) e o high (que é o maior)
 int partition(vector<int>& arr, int low, int high) {
 
-    // choose the
-    // Escolhe um pivo ou um ponto de referencia, que nesse caso e o ultimo elemento
+    // Escolhe um pivô, ou um ponto de referência, que nesse caso é o último elemento do intervalo
     int pivot = arr[high];
 
-    // undex of smaller element and indicates
-    // the right position of pivot found so far
-    //Pega o index do low que seria o inico do metodo, alem de pegar ele add -1
+    // Variável auxiliar que vai ser utilizada nas trocas de elementos, ela se refere ao menor index
+    // Ou seja, se começar no 0 o i = -1 ou se começar no 5 o i = 4
     int i = low - 1;
 
-    // Traverse arr[low..high] and move all smaller
-    // elements on left side. Elements from low to
-    // i are smaller after every iteration
-    //um for para fazer swap i e j quando o j e for menor que
+    // Temos um laço de repetição (FOR) que vai rodar enquanto o j=low for menor ou igual ao maior index high - 1
     for (int j = low; j <= high - 1; j++) {
+        // Verificamos se o elemento da posição j é menor que o pivô
         if (arr[j] < pivot) {
+            // Se caso for, o valor de i é aumentado, por exemplo: na primeira vez que rodar, no caso i=-1, é necessário aumentar o i
             i++;
+            // Trocamos os elementos das posições i e j
             swap(arr[i], arr[j]);
+            // Observação: nem sempre o if vai ser disparado, só quando: ao percorrer o vetor, encontramos um elemento menor que o pivô
+            // Um exemplo é i=-1 e j=3, ou seja, swap(i, j)
         }
     }
 
-    // move pivot after smaller elements and
-    // return its position
+    // Ao encerrar o for, trocamos a posição do pivô para o meio
     swap(arr[i + 1], arr[high]);
+    // Ficando os elementos menores que ele à esquerda e os maiores à direita
     return i + 1;
+    // Retornamos i+1 com o intuito de, quando for fazer o partition novamente, ignorarmos o pivô
 }
 
-// the QuickSort function implementation
+// Metodo quickSort que recebe um vetor, o menor e o maior index
 void quickSort(vector<int>& arr, int low, int high) {
 
+    // Verificação para impedir que o código quebre
     if (low < high) {
 
-        // pi is the partition return index of pivot
+        // Guarda o index do pivô após executar o metodo partition
         int pi = partition(arr, low, high);
 
-        // recursion calls for sma
-        // ]ller elements
-        // and greater or equals elements
+        // Realiza o quick sort à esquerda do pivô
         quickSort(arr, low, pi - 1);
+        // Realiza o quick sort à direita do pivô
         quickSort(arr, pi + 1, high);
     }
 }
 
+//Exemplo
 int main() {
     vector<int> arr = {10, 7, 8, 9, 1, 5};
     int n = arr.size();
