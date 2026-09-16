@@ -15,22 +15,31 @@ using namespace std;
 */
 void mesclar(vector<int>& numeros, int inicio, int meio, int fim)
 {
+
+    //aqui que será colocado os valores ordenados
     vector<int> temporario;
 
+    //definir os ponteiros para percorrer as duas partes do vetor
     int esquerda = inicio;
     int direita = meio + 1;
 
     // Compara os elementos das duas partes
+    //Enquanto ainda tiver número disponível dos dois lados, continua comparando.
     while (esquerda <= meio && direita <= fim)
     {
+        // Compara os elementos, se o da esquerda (se é menor ou igual) ao da direita
         if (numeros[esquerda] <= numeros[direita])
         {
+            // Se o elemento da parte esquerda for menor ou igual, adiciona ele no vetor temporário
             temporario.push_back(numeros[esquerda]);
+            //move o ponteiro da parte esquerda para o próximo elemento
             esquerda++;
         }
         else
         {
+            //se o elemento da parte direita for menor, adiciona ele no vetor temporário
             temporario.push_back(numeros[direita]);
+            //move o ponteiro da parte direita para o próximo elemento
             direita++;
         }
     }
@@ -80,6 +89,7 @@ void mergeSort(vector<int>& numeros, int inicio, int fim)
     //{50, 40, 30, (meio), 20, 10, 0}
     int meio = inicio + (fim - inicio) / 2;
 
+    // Aqui que é feito as divisões sucesivas do vetor, até que sobre apenas um elemento
     // Ordena a metade esquerda, pois do inicio ao meio é a parte da esquerda
     mergeSort(numeros, inicio, meio);
 
