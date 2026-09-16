@@ -1,80 +1,136 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-// Merges two subarrays of arr[].
-// First subarray is arr[left..mid]
-// Second subarray is arr[mid+1..right]
-void merge(vector<int>& arr, int left,  int mid, int right){
+/*
+    A função mesclar junta duas partes já ordenadas:
 
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    Exemplo:
+    parte esquerda: [2, 5, 8]
+    parte direita:  [1, 4, 9]
 
-    // Create temp vectors
-    vector<int> L(n1), R(n2);
+    Resultado:
+    [1, 2, 4, 5, 8, 9]
+*/
+void mesclar(vector<int>& numeros, int inicio, int meio, int fim)
+{
 
-    // Copy data to temp vectors L[] and R[]
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
+    //aqui que será colocado os valores ordenados
+    vector<int> temporario;
 
-    int i = 0, j = 0;
-    int k = left;
+    //definir os ponteiros para percorrer as duas partes do vetor
+    int esquerda = inicio;
+    int direita = meio + 1;
 
-    // Merge the temp vectors back
-    // into arr[left..right]
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
+    // Compara os elementos das duas partes
+    //Enquanto ainda tiver número disponível dos dois lados, continua comparando.
+    while (esquerda <= meio && direita <= fim)
+    {
+        // Compara os elementos, se o da esquerda (se é menor ou igual) ao da direita
+        if (numeros[esquerda] <= numeros[direita])
+        {
+            // Se o elemento da parte esquerda for menor ou igual, adiciona ele no vetor temporário
+            temporario.push_back(numeros[esquerda]);
+            //move o ponteiro da parte esquerda para o próximo elemento
+            esquerda++;
         }
-        else {
-            arr[k] = R[j];
-            j++;
+        else
+        {
+            //se o elemento da parte direita for menor, adiciona ele no vetor temporário
+            temporario.push_back(numeros[direita]);
+            //move o ponteiro da parte direita para o próximo elemento
+            direita++;
         }
-        k++;
     }
 
-    // Copy the remaining elements of L[],
-    // if there are any
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
+    // Adiciona o que sobrou da parte esquerda
+    while (esquerda <= meio)
+    {
+        temporario.push_back(numeros[esquerda]);
+        esquerda++;
     }
 
-    // Copy the remaining elements of R[],
-    // if there are any
-    while (j < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
+    // Adiciona o que sobrou da parte direita
+    while (direita <= fim)
+    {
+        temporario.push_back(numeros[direita]);
+        direita++;
+    }
+
+    // Copia os valores ordenados de volta para o vetor original
+    for (int i = 0; i < temporario.size(); i++)
+    {
+        numeros[inicio + i] = temporario[i];
     }
 }
 
-// begin is for left index and end is right index
-// of the sub-array of arr to be sorted
-void mergeSort(vector<int>& arr, int left, int right){
+/*
+    O Merge Sort funciona assim:
 
-    if (left >= right)
+    1. Divide o vetor em duas partes.
+    2. Divide cada parte novamente.
+    3. Continua dividindo até sobrarem partes com apenas um elemento.
+    4. Junta as partes ordenando-as.
+
+    Um único elemento já está ordenado.
+*/
+
+void mergeSort(vector<int>& numeros, int inicio, int fim)
+{
+    // Se caso possui zero ou um elemento (ai já está ordenado), então não precisa fazer nada
+    if (inicio >= fim)
+    {
         return;
+    }
 
-    int mid = left + (right - left) / 2;
-    mergeSort(arr, left, mid);
-    mergeSort(arr, mid + 1, right);
-    merge(arr, left, mid, right);
+    //calculo para achar o meio do vetor
+    //exemplo: meio = 0 + (5 - 0) / 2 = 2
+    //{50, 40, 30, (meio), 20, 10, 0}
+    int meio = inicio + (fim - inicio) / 2;
+
+    // Aqui que é feito as divisões sucesivas do vetor, até que sobre apenas um elemento
+    // Ordena a metade esquerda, pois do inicio ao meio é a parte da esquerda
+    mergeSort(numeros, inicio, meio);
+
+    // Ordena a metade direita, pois do meio+1 ao fim é a parte da direita
+    mergeSort(numeros, meio + 1, fim);
+
+    // Junta as duas metades ordenadas
+    mesclar(numeros, inicio, meio, fim);
 }
 
-// Driver code
-int main(){
+int main()
+{
+    int tamanho;
 
-    vector<int> arr = {38, 27, 43, 10};
-    int n = arr.size();
+    cout << "Digite o tamanho do vetor: ";
+    cin >> tamanho;
 
-    mergeSort(arr, 0, n - 1);
-    for (int i = 0; i < arr.size(); i++)
-        cout << arr[i] << " ";
+    if (tamanho <= 0)
+    {
+        cout << "O tamanho deve ser maior que zero." << endl;
+        return 1;
+    }
+
+    vector<int> numeros(tamanho);
+
+    cout << "Digite os " << tamanho << " numeros do vetor:" << endl;
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        cin >> numeros[i];
+    }
+
+    mergeSort(numeros, 0, tamanho - 1);
+
+    cout << "Vetor ordenado: ";
+
+    for (int numero : numeros)
+    {
+        cout << numero << " ";
+    }
+
     cout << endl;
 
     return 0;
