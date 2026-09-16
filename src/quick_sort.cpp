@@ -33,7 +33,6 @@ int partition(vector<int>& arr, int low, int high) {
 }
 
 // Metodo partitionRandom que escolhe um pivô aleatório em vez de sempre usar o último elemento
-// Recebe o vetor arr, o index low (menor) e o high (maior)
 int partitionRandom(vector<int>& arr, int low, int high) {
 
     // Sorteia um index qualquer dentro do intervalo [low, high]
@@ -46,7 +45,6 @@ int partitionRandom(vector<int>& arr, int low, int high) {
     swap(arr[randomIndex], arr[high]);
 
     // A partir daqui, a lógica é exatamente igual ao partition tradicional
-    // Só que agora quem está em arr[high] é o elemento sorteado, e não o último original
     return partition(arr, low, high);
 }
 
@@ -75,7 +73,7 @@ int medianOfThree(vector<int>& arr, int low, int high) {
     // Ou seja, arr[mid] é o valor mediano dos três, que é justamente o pivô que queremos usar
 
     // Troca o mediano (que está em arr[mid]) para arr[high]
-    // Necessário porque o metodo partition tradicional sempre espera o pivô na última posição
+    // Necessário porque o metodo partition tradicional sempre espera o pivô na última posição igual no metodo random
     swap(arr[mid], arr[high]);
 
     // A partir daqui, a lógica é exatamente igual ao partition tradicional
@@ -86,7 +84,6 @@ int medianOfThree(vector<int>& arr, int low, int high) {
 // Nesse caso o Quick puxa o metodo partition, mas poderia ser os dois metodos acima
 void quickSort(vector<int>& arr, int low, int high) {
 
-    
     // Verificação para impedir que o código quebre
     if (low < high) {
 
@@ -100,14 +97,51 @@ void quickSort(vector<int>& arr, int low, int high) {
     }
 }
 
-//Exemplo
-int main() {
-    vector<int> arr = {10, 7, 8, 9, 1, 5};
-    int n = arr.size();
-    quickSort(arr, 0, n - 1);
-
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
+// Função auxiliar para imprimir os vetores
+void imprimirVetor(const vector<int>& arr) {
+    if (arr.empty()) {
+        cout << "[]";
+    } else {
+        cout << "[ ";
+        for (int i = 0; i < arr.size(); i++) {
+            cout << arr[i] << " ";
+        }
+        cout << "]";
     }
+    cout << endl;
+}
+
+// Função auxiliar para automatizar os testes
+void testarQuickSort(string nomeDoTeste, vector<int> arr) {
+    cout << "--- " << nomeDoTeste << " ---" << endl;
+    cout << "Original: ";
+    imprimirVetor(arr);
+
+    // Só chama o quickSort se o vetor não estiver vazio para evitar erro de índice
+    if (!arr.empty()) {
+        quickSort(arr, 0, arr.size() - 1);
+    }
+
+    cout << "Ordenado: ";
+    imprimirVetor(arr);
+    cout << endl;
+}
+
+int main() {
+    cout << "\n=== DEMONSTRACAO DE MELHOR, MEDIO E PIOR CASO ===" << endl;
+
+    // O Melhor Caso Teorico (Pivo consegue dividir as metades quase perfeitamente)
+    testarQuickSort("Melhor Caso", {4, 1, 3, 5, 6, 7, 2});
+
+    // O Caso Medio (O cenario mais comum: elementos totalmente baguncados e aleatorios)
+    // As particoes nao serao perfeitas, mas na media o algoritmo performa incrivelmente bem.
+    testarQuickSort("Caso Medio", {7, 2, 9, 1, 5, 10, 3, 8, 6, 4});
+
+    // O Pior Caso Classico (Elementos ja ordenados)
+    testarQuickSort("Pior Caso Classico", {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+
+    // O Pior Caso Classico Inverso (Elementos ordenados de forma decrescente)
+    testarQuickSort("Pior Caso Inverso ", {10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
+
     return 0;
 }
