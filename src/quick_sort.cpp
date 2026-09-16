@@ -128,6 +128,7 @@ void testarQuickSort(string nomeDoTeste, vector<int> arr) {
 }
 
 int main() {
+    // Nessa main eu implementei 4 teste onde cada um se refere a um caso sendo eles o Melhor, Medio e Pior
     cout << "\n=== DEMONSTRACAO DE MELHOR, MEDIO E PIOR CASO ===" << endl;
 
     // O Melhor Caso Teorico (Pivo consegue dividir as metades quase perfeitamente)
